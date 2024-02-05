@@ -41,3 +41,13 @@ export const obtenerMes = (dateString) => {
   const formattedDate = new Intl.DateTimeFormat('es-MX', options).format(date)
   return formattedDate
 }
+
+export const formatCurrency = (amount) => {
+  const options = {
+    style: 'currency',
+    currency: 'MXN'
+  }
+
+  const formattedAmount = new Intl.NumberFormat('es-MX', options).format(amount)
+  return formattedAmount
+}

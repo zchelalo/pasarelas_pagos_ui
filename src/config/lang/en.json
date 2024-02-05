@@ -34,5 +34,6 @@
   "previous": "Previous",
   "columns": "Columns",
   "search": "Search...",
-  "no_data": "No results"
+  "no_data": "No results",
+  "welcome": "Welcome"
 }
