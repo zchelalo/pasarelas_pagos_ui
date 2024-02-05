@@ -28,3 +28,16 @@ export const formatDate = (dateString) => {
   const formattedDate = new Intl.DateTimeFormat('es-MX', options).format(date)
   return formattedDate
 }
+
+export const obtenerMes = (dateString) => {
+  const date = new Date(dateString)
+  const options = {
+    month: 'long'
+  }
+
+  // Ajusta manualmente la hora según la zona horaria de Hermosillo (GMT-7)
+  date.setHours(date.getHours() - 7)
+
+  const formattedDate = new Intl.DateTimeFormat('es-MX', options).format(date)
+  return formattedDate
+}

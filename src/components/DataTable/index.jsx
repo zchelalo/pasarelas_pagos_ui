@@ -133,7 +133,7 @@ function DataTable({ data, columns }) {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  {t('no_data')}
                 </TableCell>
               </TableRow>
             )}

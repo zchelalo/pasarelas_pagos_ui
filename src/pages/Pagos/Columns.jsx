@@ -55,7 +55,26 @@ function Columns({ t }) {
     },
     {
       header: t('payment_status'),
-      accessorKey: 'estadoPago.nombre'
+      accessorKey: 'estadoPago.nombre',
+      cell: info => {
+        if (info.getValue() === 'Pendiente') {
+          return (
+            <span className='bg-yellow-400 text-yellow-800 font-semibold p-1 rounded'>{info.getValue()}</span>
+          )
+        }
+
+        if (info.getValue() === 'Cancelado') {
+          return (
+            <span className='bg-red-400 text-red-800 font-semibold p-1 rounded'>{info.getValue()}</span>
+          )
+        }
+
+        if (info.getValue() === 'Completado') {
+          return (
+            <span className='bg-green-400 text-green-800 font-semibold p-1 rounded'>{info.getValue()}</span>
+          )
+        }
+      }
     },
     {
       header: ({ column }) => {
@@ -142,6 +161,7 @@ function Columns({ t }) {
               <DropdownMenuLabel>{t('actions')}</DropdownMenuLabel>
               <DropdownMenuItem
                 onClick={() => navigator.clipboard.writeText(pago.id)}
+                className='cursor-pointer'
               >
                 {t('copy_id')}
               </DropdownMenuItem>

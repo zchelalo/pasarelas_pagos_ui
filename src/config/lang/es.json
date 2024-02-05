@@ -33,5 +33,6 @@
   "next": "Siguiente",
   "previous": "Anterior",
   "columns": "Columnas",
-  "search": "Buscar..."
+  "search": "Buscar...",
+  "no_data": "No hay datos"
 }
