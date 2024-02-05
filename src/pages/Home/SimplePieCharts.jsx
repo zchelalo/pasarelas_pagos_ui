@@ -33,7 +33,10 @@ function SimplePieCharts({ data }) {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}     
         </Pie>
-        <Tooltip />
+        <Tooltip
+          contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.85)', color: '#ffffff', padding: '10px', border: 'none', borderRadius: '0.5rem' }}
+          itemStyle={{ color: '#fff' }}
+        />
       </PieChart>
     </ResponsiveContainer>
   )

@@ -18,7 +18,10 @@ import {
 
 import { Check, ChevronsUpDown } from 'lucide-react'
 
+import { useTranslation } from 'react-i18next'
+
 function ComboBox({ filtros, value, setValue }) {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(false)
 
   return (
@@ -28,18 +31,18 @@ function ComboBox({ filtros, value, setValue }) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-full justify-between"
         >
           {value
             ? filtros.find(filtro => filtro.value === value)?.label
-            : "Select framework..."}
+            : t('select_filter')}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." />
-          <CommandEmpty>No framework found.</CommandEmpty>
+          <CommandInput placeholder={t('search')} />
+          <CommandEmpty>{t('no_results_found')}</CommandEmpty>
           <CommandGroup>
             {filtros.map((filtro) => (
               <CommandItem

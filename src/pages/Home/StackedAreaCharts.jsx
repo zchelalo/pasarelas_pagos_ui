@@ -23,7 +23,7 @@ function StackedAreaCharts({ data }) {
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='name' />
         <YAxis />
-        <Tooltip />
+        <Tooltip contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.85)', color: '#fff', padding: '10px', border: 'none', borderRadius: '0.5rem' }} />
         <Area type='monotone' dataKey='total' stackId='1' stroke='#6b48ff' fill='#6b48ff' />
       </AreaChart>
     </ResponsiveContainer>

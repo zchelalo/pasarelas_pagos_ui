@@ -22,12 +22,13 @@ function SimpleBarCharts({ data }) {
         }}
       >
       <CartesianGrid strokeDasharray='4 1 2' />    
-      <XAxis dataKey='name'/>
+      <XAxis dataKey='name' />
       <YAxis />
-      <Tooltip />
+      <Tooltip
+        contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.85)', color: '#fff', padding: '10px', border: 'none', borderRadius: '0.5rem' }}
+      />
       <Legend />
       <Bar dataKey='total' fill='#6b48ff'/>
-      {/* <Bar dataKey='age' fill='#1ee3cf'/> */}
       </BarChart>
     </ResponsiveContainer>
   )
