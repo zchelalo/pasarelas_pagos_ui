@@ -12,7 +12,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 
 import { MdDelete } from 'react-icons/md'
 
-import { formatDate } from '@/lib/utils'
+import moment from 'moment'
 
 function Columns({ t }) {
 
@@ -104,7 +104,7 @@ function Columns({ t }) {
         )
       },
       accessorKey: 'createdAt',
-      cell: info => info.getValue() ? formatDate(info.getValue()) : ''
+      cell: info => info.getValue() ? moment(info.getValue()).utc(true).local().format('DD/MM/YYYY HH:mm:ss') : ''
     },
     {
       header: ({ column }) => {
@@ -119,7 +119,7 @@ function Columns({ t }) {
         )
       },
       accessorKey: 'updatedAt',
-      cell: info => info.getValue() ? formatDate(info.getValue()) : ''
+      cell: info => info.getValue() ? moment(info.getValue()).utc(true).local().format('DD/MM/YYYY HH:mm:ss') : ''
     },
     {
       id: 'actions',

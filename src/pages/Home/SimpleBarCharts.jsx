@@ -8,8 +8,34 @@ import {
   XAxis,
   YAxis
 } from 'recharts'
+import { useTranslation } from 'react-i18next'
+import moment from 'moment'
 
 function SimpleBarCharts({ data }) {
+  const { t } = useTranslation()
+  
+
+  const customTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      if (moment(payload[0].payload.name, 'MMMM YYYY', true).isValid()) {
+        return (
+          <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.85)', color: '#fff', padding: '10px', border: 'none', borderRadius: '0.5rem' }}>
+            <p>{`${t((payload[0].payload.name).split(' ')[0].toLowerCase())} ${(payload[0].payload.name).split(' ')[1]}`}</p>
+            <p className='text-violet-500'>{`${payload[0].name}: ${payload[0].value}`}</p>
+          </div>
+        )
+      } else {
+        return (
+          <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.85)', color: '#fff', padding: '10px', border: 'none', borderRadius: '0.5rem' }}>
+            <p>{payload[0].payload.name}</p>
+            <p className='text-violet-500'>{`${payload[0].name}: ${payload[0].value}`}</p>
+          </div>
+        )
+      }
+    }
+    return null
+  }
+
   return (
     <ResponsiveContainer width='100%' aspect={2}>
       <BarChart 
@@ -24,9 +50,7 @@ function SimpleBarCharts({ data }) {
       <CartesianGrid strokeDasharray='4 1 2' />    
       <XAxis dataKey='name' />
       <YAxis />
-      <Tooltip
-        contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.85)', color: '#fff', padding: '10px', border: 'none', borderRadius: '0.5rem' }}
-      />
+      <Tooltip content={customTooltip} />
       <Legend />
       <Bar dataKey='total' fill='#6b48ff'/>
       </BarChart>

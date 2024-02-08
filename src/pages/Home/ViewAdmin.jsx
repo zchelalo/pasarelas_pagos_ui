@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext/useAuth'
 import { useFetch } from '@/hooks/useFetch'
-import { obtenerMes, formatCurrency } from '@/lib/utils'
+import { dentroDelRangoDeFechas, obtenerSemanasMes, formatCurrency } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
+import moment from 'moment'
 
 import { SimpleBarCharts } from '@/pages/Home/SimpleBarCharts'
 import { StackedAreaCharts } from '@/pages/Home/StackedAreaCharts'
@@ -29,29 +30,77 @@ function ViewAdmin() {
     }
   })
 
-  const groupData = (payments) => {
+  const groupData = (payments, filter) => {
+    if (filter === '') return []
+
     const dataGraficas = payments.reduce((result, currentItem) => {
       const { total, createdAt } = currentItem
-      let mesMinusculas = obtenerMes(createdAt)
-      let mes = t(mesMinusculas)
+      let name = ''
+
+      const fechaUTC = moment(createdAt).utc(true)
+      const fechaLocal = fechaUTC.clone().local()
+
+      const hoyLocal = moment.utc().local()
+
+      if (filter === 'semana') {
+
+        const diaSemana = `${t(fechaLocal.format('dddd').toLowerCase())} ${fechaLocal.format('DD/MM/YYYY')}`
+        name = diaSemana
+
+      } else if (filter === 'mes') {
+
+        const semanas = obtenerSemanasMes(hoyLocal)
+        const semana = semanas.filter(week => {
+          const inicio = moment(week.inicio, 'DD-MM-YYYY').format('YYYY-MM-DD')
+          const fin = moment(week.fin, 'DD-MM-YYYY').format('YYYY-MM-DD')
+          return dentroDelRangoDeFechas(fechaLocal.format('YYYY-MM-DD'), inicio, fin)
+        })
+        name = `${moment(semana[0].inicio, 'DD-MM-YYYY').format('DD/MM/YYYY')} - ${moment(semana[0].fin, 'DD-MM-YYYY').format('DD/MM/YYYY')}`
+
+      } else if (filter === 'año') {
+
+        const mes = fechaLocal.format('MMMM YYYY')
+        name = mes
+
+      }
     
       // Verificar si ya existe un grupo para el usuario
-      const existingMonth = result ? result.find(group => group.name === mes) : false
+      const existsResult = result ? result.find(group => group.name === name) : false
     
-      if (existingMonth) {
+      if (existsResult) {
         // Si ya existe, sumar el total al grupo existente
-        existingMonth.total += parseFloat(total)
-        existingMonth.total = Number(parseFloat(existingMonth.total).toFixed(2))
+        existsResult.total += parseFloat(total)
+        existsResult.total = Number(parseFloat(existsResult.total).toFixed(2))
       } else {
         // Si no existe, crear un nuevo grupo y agregarlo al resultado
         result.push({
-          name: mes,
+          name: name,
           total: Number(parseFloat(total).toFixed(2))
         })
       }
     
       return result
     }, [])
+
+    if (filter === 'semana') {
+      dataGraficas.sort((a, b) => {
+        const fechaA = moment(a.name.split(' ')[1], 'DD/MM/YYYY').format('YYYY-MM-DD')
+        const fechaB = moment(b.name.split(' ')[1], 'DD/MM/YYYY').format('YYYY-MM-DD')
+        return moment(fechaA).diff(moment(fechaB))
+      })
+    } else if (filter === 'mes') {
+      dataGraficas.sort((a, b) => {
+        const fechaA = moment(a.name.split(' ')[0], 'DD/MM/YYYY').format('YYYY-MM-DD')
+        const fechaB = moment(b.name.split(' ')[0], 'DD/MM/YYYY').format('YYYY-MM-DD')
+        return moment(fechaA).diff(moment(fechaB))
+      })
+    } else if (filter === 'año') {
+      dataGraficas.sort((a, b) => {
+        const fechaA = moment(a.name, 'MMMM YYYY').format('YYYY-MM')
+        const fechaB = moment(b.name, 'MMMM YYYY').format('YYYY-MM')
+        return moment(fechaA).diff(moment(fechaB))
+      })
+    }
 
     return dataGraficas
   }
@@ -62,21 +111,22 @@ function ViewAdmin() {
     const pagosFiltrados = payments.filter(pago => {
       const { createdAt } = pago
 
-      const hoy = new Date()
-      const fechaPago = new Date(createdAt)
-      const diferencia = hoy.getTime() - fechaPago.getTime()
-      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24))
+      const fechaUTC = moment.utc(createdAt).format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]')
+      const hoy = moment.utc().format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]')
 
       if (filter === 'semana') {
-        return dias <= 7
+        const inicio = moment.utc(hoy).subtract(6, 'days').format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]')
+        return dentroDelRangoDeFechas(fechaUTC, inicio, hoy)
       }
 
       if (filter === 'mes') {
-        return dias <= 30
+        const inicio = moment.utc(hoy).subtract(1, 'month').format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]')
+        return dentroDelRangoDeFechas(fechaUTC, inicio, hoy)
       }
 
       if (filter === 'año') {
-        return dias <= 365
+        const inicio = moment.utc(hoy).subtract(1, 'year').format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]')
+        return dentroDelRangoDeFechas(fechaUTC, inicio, hoy)
       }
     })
 
@@ -215,19 +265,19 @@ function ViewAdmin() {
 
             <article className='w-full sm:w-full md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/3'>
               <div className='box-shadow p-2 sm:p-4 md:p-6 rounded-lg dark:bg-zinc-900 m-2'>
-                <SimpleBarCharts data={groupData(pagos)} />
+                <SimpleBarCharts data={groupData(obtenerPagos(pagos, filtro), filtro)} />
               </div>
             </article>
 
             <article className='w-full sm:w-full md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/3'>
               <div className='box-shadow p-2 sm:p-4 md:p-6 rounded-lg dark:bg-zinc-900 m-2'>
-                <StackedAreaCharts data={groupData(pagos)} />
+                <StackedAreaCharts data={groupData(obtenerPagos(pagos, filtro), filtro)} />
               </div>
             </article>
 
             <article className='w-full sm:w-full md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/3'>
               <div className='box-shadow p-2 sm:p-4 md:p-6 rounded-lg dark:bg-zinc-900 m-2'>
-                <SimplePieCharts data={groupData(pagos)} />
+                <SimplePieCharts data={groupData(obtenerPagos(pagos, filtro), filtro)} />
               </div>
             </article>
 
