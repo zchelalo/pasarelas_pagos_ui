@@ -8,6 +8,7 @@ import moment from 'moment'
 import { SimpleBarCharts } from '@/pages/Home/SimpleBarCharts'
 import { StackedAreaCharts } from '@/pages/Home/StackedAreaCharts'
 import { SimplePieCharts } from '@/pages/Home/SimplePieCharts'
+import { Loading } from '@/pages/Home/Loading'
 import { ComboBox } from '@/components/ComboBox'
 
 import { MdPayments } from 'react-icons/md'
@@ -203,14 +204,15 @@ function ViewAdmin() {
 
   return (
     <>
-      {loading && <p>Cargando...</p>}
-      {(!loading && !error && pagos?.length > 0) ? (
+      {loading && <Loading />}
+      {!loading && ((!error && pagos?.length > 0) ? (
         <>
           <div className='w-full mb-2 flex justify-center'>
             <div className='w-full mb-2 sm:w-1/3 sm:mb-0 px-2'>
               <ComboBox filtros={filtros} value={filtro} setValue={setFiltro} />
             </div>
           </div>
+          
           <section className='w-full flex flex-wrap mb-4'>
 
             <article className='w-full mb-2 sm:w-1/3 sm:mb-0'>
@@ -283,7 +285,7 @@ function ViewAdmin() {
 
           </section>
         </>
-      ) : 'No hay pagos registrados'}
+      ) : 'No hay pagos registrados')}
     </>
   )
 }
