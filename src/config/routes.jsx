@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 
 import { AuthRoute } from '@/contexts/AuthContext/AuthRoute'
 import { PublicRoute } from '@/contexts/AuthContext/PublicRoute'
+import { RolesPermitidos } from '@/contexts/AuthContext/RolesPermitidos'
 
 import { Home } from '@/pages/Home'
 import { Login } from '@/pages/Login'
@@ -30,7 +31,8 @@ function Rutas() {
       name: t('home'),
       icon: <FaHome />,
       private: true,
-      public_only: false
+      public_only: false,
+      allowed_roles: ['admin', 'cliente']
     },
     {
       path: '/perfil',
@@ -42,7 +44,8 @@ function Rutas() {
       name: t('profile'),
       icon: <FaUser />,
       private: true,
-      public_only: false
+      public_only: false,
+      allowed_roles: ['admin', 'cliente']
     },
     {
       path: '/login',
@@ -60,13 +63,16 @@ function Rutas() {
       path: '/usuarios',
       element: (
         <AuthRoute>
-          <Usuarios />
+          <RolesPermitidos roles={['admin']}>
+            <Usuarios />
+          </RolesPermitidos>
         </AuthRoute>
       ),
       name: t('users'),
       icon: <FaUsers />,
       private: true,
-      public_only: false
+      public_only: false,
+      allowed_roles: ['admin']
     },
     {
       path: '/pasarelas',
@@ -78,7 +84,8 @@ function Rutas() {
       name: t('payment_gateways'),
       icon: <MdPayments />,
       private: true,
-      public_only: false
+      public_only: false,
+      allowed_roles: ['admin', 'cliente']
     },
     {
       path: '/keys',
@@ -90,7 +97,8 @@ function Rutas() {
       name: t('keys'),
       icon: <IoKeySharp />,
       private: true,
-      public_only: false
+      public_only: false,
+      allowed_roles: ['admin', 'cliente']
     },
     {
       path: '/pagos',
@@ -102,7 +110,8 @@ function Rutas() {
       name: t('payments'),
       icon: <MdSell />,
       private: true,
-      public_only: false
+      public_only: false,
+      allowed_roles: ['admin', 'cliente']
     },
     {
       path: '*',

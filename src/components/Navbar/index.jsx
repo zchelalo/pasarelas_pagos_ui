@@ -62,18 +62,20 @@ function Navbar({ handleSelectChange, handleChangeTheme, idioma, theme }) {
 
           <nav className='mb-4'>
             <ul>
-              {!!routes && routes.map(route => {
+              {routes && routes.map(route => {
 
-                if (!!route.name === false) return undefined
+                if (!route.name) return undefined
+
+                if (route.private && !route.allowed_roles.includes(auth.usuario.rol)) return undefined
 
                 if (route.path !== '/login' && route.path !== '/logout' && route.path !== '/perfil') {
                   return (
                     <li key={route.path} className='mb-2'>
                       <NavLink
-                        className={({ isActive }) => `flex items-center text-lg dark:text-gray-200 hover:border-r-2 dark:border-r-gray-200 border-r-gray-800 ${!!isActive && 'font-medium'}`}
+                        className={({ isActive }) => `flex items-center text-lg dark:text-gray-200 hover:border-r-2 dark:border-r-gray-200 border-r-gray-800 ${isActive && 'font-semibold'}`}
                         to={route.path}
                       >
-                        {!!route.icon ? route.icon : undefined}<span className='ml-2'>{route.name}</span>
+                        {route.icon ? route.icon : undefined}<span className='ml-2'>{route.name}</span>
                       </NavLink>
                     </li>
                   )
@@ -87,10 +89,10 @@ function Navbar({ handleSelectChange, handleChangeTheme, idioma, theme }) {
 
           <SheetFooter className='flex-col'>
             <NavLink
-              className={({ isActive }) => `flex flex-wrap justify-center items-center sm:w-1/2 text-lg dark:text-gray-800 dark:bg-gray-200 p-2 mb-1 rounded-lg dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:bg-gray-800 hover:text-gray-200 ${!!isActive ? 'font-medium' : ''}`}
+              className={({ isActive }) => `flex flex-wrap justify-center items-center sm:w-1/2 text-lg dark:text-gray-800 dark:bg-gray-200 p-2 mb-1 rounded-lg dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:bg-gray-800 hover:text-gray-200 ${isActive && 'font-semibold'}`}
               to={rutaPerfil.path}
             >
-              {!!rutaPerfil.icon ? rutaPerfil.icon : undefined}<span className='ml-2'>{rutaPerfil.name}</span>
+              {rutaPerfil.icon ? rutaPerfil.icon : undefined}<span className='ml-2'>{rutaPerfil.name}</span>
             </NavLink>
 
             <Button
