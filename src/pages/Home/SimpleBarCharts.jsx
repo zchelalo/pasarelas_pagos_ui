@@ -8,12 +8,9 @@ import {
   XAxis,
   YAxis
 } from 'recharts'
-import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 
-function SimpleBarCharts({ data }) {
-  const { t } = useTranslation()
-  
+function SimpleBarCharts({ data, t }) {
 
   const customTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {

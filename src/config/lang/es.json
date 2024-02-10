@@ -69,5 +69,6 @@
   "thursday": "Jueves",
   "friday": "Viernes",
   "saturday": "Sábado",
-  "sunday": "Domingo"
+  "sunday": "Domingo",
+  "no_payments_registered": "No hay pagos registrados"
 }

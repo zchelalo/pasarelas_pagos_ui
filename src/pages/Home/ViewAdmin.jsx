@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext/useAuth'
 import { useFetch } from '@/hooks/useFetch'
 import { dentroDelRangoDeFechas, obtenerSemanasMes, formatCurrency } from '@/lib/utils'
-import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 
 import { SimpleBarCharts } from '@/pages/Home/SimpleBarCharts'
 import { StackedAreaCharts } from '@/pages/Home/StackedAreaCharts'
 import { SimplePieCharts } from '@/pages/Home/SimplePieCharts'
 import { Loading } from '@/pages/Home/Loading'
+import { NoPayments } from '@/pages/Home/NoPayments'
 import { ComboBox } from '@/components/ComboBox'
 
 import { MdPayments } from 'react-icons/md'
@@ -17,8 +17,7 @@ import { PiUserGearBold } from 'react-icons/pi'
 
 import './Home.css'
 
-function ViewAdmin() {
-  const { t } = useTranslation()
+function ViewAdmin({ t }) {
   const [filtro, setFiltro] = useState('semana')
 
   const { usuario } = useAuth()
@@ -267,7 +266,7 @@ function ViewAdmin() {
 
             <article className='w-full sm:w-full md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/3'>
               <div className='box-shadow p-2 sm:p-4 md:p-6 rounded-lg dark:bg-zinc-900 m-2'>
-                <SimpleBarCharts data={groupData(obtenerPagos(pagos, filtro), filtro)} />
+                <SimpleBarCharts data={groupData(obtenerPagos(pagos, filtro), filtro)} t={t} />
               </div>
             </article>
 
@@ -285,7 +284,7 @@ function ViewAdmin() {
 
           </section>
         </>
-      ) : 'No hay pagos registrados')}
+      ) : <NoPayments t={t} />)}
     </>
   )
 }

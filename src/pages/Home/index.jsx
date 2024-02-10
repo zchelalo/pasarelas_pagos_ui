@@ -17,7 +17,7 @@ function Home() {
       </div>
       <hr className='mb-4' />
       <AdminView>
-        <ViewAdmin />
+        <ViewAdmin t={t} />
       </AdminView>
       <ClientView>
         <div className='mb-4 mt-2 mx-2'>
