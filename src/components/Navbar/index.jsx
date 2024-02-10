@@ -89,14 +89,14 @@ function Navbar({ handleSelectChange, handleChangeTheme, idioma, theme }) {
 
           <SheetFooter className='flex-col'>
             <NavLink
-              className={({ isActive }) => `flex flex-wrap justify-center items-center sm:w-1/2 text-lg dark:text-gray-800 dark:bg-gray-200 p-2 mb-1 rounded-lg dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:bg-gray-800 hover:text-gray-200 ${isActive && 'font-semibold'}`}
+              className={({ isActive }) => `flex flex-wrap justify-center items-center sm:w-1/2 text-lg bg-gray-200 text-gray-800 hover:bg-gray-800 hover:text-gray-200 dark:text-gray-800 dark:bg-gray-200 p-2 mb-1 rounded-lg dark:hover:bg-gray-800 dark:hover:text-gray-200 ${isActive && 'font-semibold'}`}
               to={rutaPerfil.path}
             >
               {rutaPerfil.icon ? rutaPerfil.icon : undefined}<span className='ml-2'>{rutaPerfil.name}</span>
             </NavLink>
 
             <Button
-              className='h-full sm:w-1/2 text-lg dark:text-gray-800 dark:bg-gray-200 p-2 mb-1 rounded-lg dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:bg-gray-800 hover:text-gray-200'
+              className='h-full sm:w-1/2 text-lg bg-gray-200 text-gray-800 hover:bg-gray-800 hover:text-gray-200 dark:text-gray-800 dark:bg-gray-200 p-2 mb-1 rounded-lg dark:hover:bg-gray-800 dark:hover:text-gray-200'
               onClick={handleLogout}
             >
               <IoLogOut /><span className='ml-2'>{t('logout')}</span>

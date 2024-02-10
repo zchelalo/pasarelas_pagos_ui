@@ -22,16 +22,20 @@ function Login() {
   const auth = useAuth()
 
   const formSchema = z.object({
-    correo: z.union([
-      z.string().email({
-        message: t('email_validation')
-      }),
-      z.string().length(0)
-    ]).optional().transform(correo => correo === '' ? null : correo),
+    correo: z.string().email({
+      message: t('email_validation')
+    }),
     password: z.string().min(8, {
       message: t('password_validation')
     })
   })
+
+  // correo: z.union([
+  //   z.string().email({
+  //     message: t('email_validation')
+  //   }),
+  //   z.string().length(0)
+  // ]).optional().transform(correo => correo === '' ? null : correo),
 
   // 1. Define your form.
   const form = useForm({
