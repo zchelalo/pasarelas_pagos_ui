@@ -1,26 +1,12 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import { createPortal } from 'react-dom'
+import './Modal.css'
 
-function Modal() {
-  return (
-    <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your account
-            and remove your data from our servers.
-          </DialogDescription>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
+function Modal({ children }) {
+  return createPortal(
+    <div className='ModalBackground'>
+      {children}
+    </div>,
+    document.getElementById('modal')
   )
 }
 

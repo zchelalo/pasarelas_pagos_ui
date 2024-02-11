@@ -56,3 +56,7 @@ export const obtenerSemanasMes = (fecha) => {
 
   return semanasUltimoMes
 }
+
+export const primeraMayuscula = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
