@@ -2,6 +2,7 @@ import { clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import Cookies from 'js-cookie'
 import moment from 'moment'
+import { back_url } from '@/config/const'
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs))
@@ -59,4 +60,23 @@ export const obtenerSemanasMes = (fecha) => {
 
 export const primeraMayuscula = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+export const fetchData = async ({ url, method = 'GET', body = null, headers = {} }) => {
+  try {
+    const response = await fetch(`${back_url}${url}`, {
+      method: method,
+      headers: headers,
+      body: body
+    })
+
+    if (!response.ok) { 
+      throw { status: response.status, error: response.statusText }
+    }
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw error
+  }
 }

@@ -17,15 +17,18 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { useToast } from '@/components/ui/use-toast'
 import { IoClose } from 'react-icons/io5'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { primeraMayuscula } from '@/lib/utils'
+import { primeraMayuscula, fetchData } from '@/lib/utils'
 
-function EditForm({ t, usuario, tiposUsuario, setOpenEditModal }) {
+function EditForm({ t, usuario, usuarios, setUsuarios, tiposUsuario, setOpenEditModal, token, logout }) {
+  const { toast } = useToast()
+
   const formSchema = z.object({
     nombre: z.string().min(1, {
       message: 'El nombre es requerido'
@@ -49,8 +52,59 @@ function EditForm({ t, usuario, tiposUsuario, setOpenEditModal }) {
     }
   })
 
-  const onSubmit = ({ nombre, correo, tiposUsuarioId }) => {
-    console.log(nombre, correo, tiposUsuarioId)
+  const onSubmit = async ({ nombre, correo, tiposUsuarioId }) => {
+    try {
+      await fetchData({
+        url: `/v1/usuarios/${usuario.id}`,
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          nombre,
+          correo,
+          tiposUsuarioId
+        })
+      })
+
+      toast({
+        title: 'Usuario actualizado',
+        description: 'El usuario ha sido actualizado exitosamente',
+        status: 'success'
+      })
+
+      let newUsuarios = usuarios.map(u => {
+        if (u.id !== usuario.id) return u
+        return {
+          ...u,
+          nombre,
+          correo,
+          tiposUsuarioId: parseInt(tiposUsuarioId)
+        }
+      })
+      setUsuarios(newUsuarios)
+
+      // Espera a que setUsuarios haya completado su actualización
+      await new Promise(resolve => setTimeout(resolve, 0))
+
+      // Después de que setUsuarios haya completado, entonces ejecuta setPageIndex
+      usuario.setPageIndex()
+    } catch (error) {
+      if (error.error) {
+        if (error.status === 401) {
+          logout()
+        }
+  
+        toast({
+          title: 'Error',
+          description: error.error,
+          status: 'error'
+        })
+      }
+    }
+
+    setOpenEditModal(false)
   }
 
   return (

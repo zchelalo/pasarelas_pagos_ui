@@ -8,8 +8,8 @@ import { Columns } from '@/pages/Usuarios/Columns'
 import { EditForm } from '@/pages/Usuarios/EditForm'
 
 function Usuarios() {
-  const { usuario } = useAuth()
-  const { data: usuarios, loading, error } = useFetch({
+  const { usuario, logout } = useAuth()
+  const { data: usuarios, setData: setUsuarios, loading, error } = useFetch({
     url: '/v1/usuarios',
     method: 'GET',
     headers: {
@@ -17,7 +17,7 @@ function Usuarios() {
       'Authorization': `Bearer ${usuario.token}`
     }
   })
-  const { data: tiposUsuario, loading: tiposUsuarioLoading, error: tiposUsuarioError } = useFetch({
+  const { data: tiposUsuario } = useFetch({
     url: '/v1/tipos-usuarios',
     method: 'GET',
     headers: {
@@ -51,8 +51,12 @@ function Usuarios() {
           <EditForm
             t={t}
             usuario={infoUsuario}
+            usuarios={usuarios}
+            setUsuarios={setUsuarios}
             tiposUsuario={tiposUsuario}
             setOpenEditModal={setOpenEditModal}
+            token={usuario.token}
+            logout={logout}
           />
         </ Modal>
       )}

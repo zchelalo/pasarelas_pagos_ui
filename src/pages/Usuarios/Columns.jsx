@@ -157,8 +157,9 @@ function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoUsuario }) {
           </DropdownMenu>
         )
       },
-      cell: ({ row }) => {
+      cell: ({ row, table }) => {
         const usuario = row.original
+        const paginaActual = table.options.state.pagination.pageIndex
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -178,7 +179,7 @@ function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoUsuario }) {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className='cursor-pointer'
-                onClick={() => abrirModalEditar(usuario)}
+                onClick={() => abrirModalEditar({ ...usuario, setPageIndex: () => table.setPageIndex(paginaActual) })}
               >
                 Editar
               </DropdownMenuItem>

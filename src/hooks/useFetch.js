@@ -3,7 +3,7 @@ import { back_url } from '@/config/const'
 import { useToast } from '@/components/ui/use-toast'
 import { useAuth } from '@/contexts/AuthContext/useAuth'
 
-function useFetch({ url, method = 'GET', body = null, headers = {}}) {
+function useFetch({ url, method = 'GET', body = null, headers = {} }) {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -49,7 +49,7 @@ function useFetch({ url, method = 'GET', body = null, headers = {}}) {
     obtenerData()
   }, [])
 
-  return { data, loading, error }
+  return { data, setData, loading, error }
 }
 
 export { useFetch }
