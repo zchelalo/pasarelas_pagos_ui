@@ -26,13 +26,12 @@ import { z } from 'zod'
 
 import { primeraMayuscula, fetchData } from '@/lib/utils'
 
-function EditForm({
+function CreateForm({
   t,
-  usuario,
+  tiposUsuario,
+  setOpenCreateModal,
   usuarios,
   setUsuarios,
-  tiposUsuario,
-  setOpenEditModal,
   auth
 }) {
   const { toast } = useToast()
@@ -44,6 +43,9 @@ function EditForm({
     correo: z.string().email({
       message: t('email_validation')
     }),
+    password: z.string().min(8, {
+      message: 'La contraseña es requerida y debe tener al menos 8 caracteres'
+    }),
     tiposUsuarioId: z.number().int({
       message: 'El tipo de usuario debe ser un valor entero positivo'
     }).or(z.string().regex(/^[1-9]\d*$/, {
@@ -54,17 +56,18 @@ function EditForm({
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      nombre: usuario.nombre,
-      correo: usuario.correo,
-      tiposUsuarioId: (usuario.tiposUsuarioId).toString()
+      nombre: '',
+      correo:'',
+      password: '',
+      tiposUsuarioId: ''
     }
   })
 
-  const onSubmit = async ({ nombre, correo, tiposUsuarioId }) => {
+  const onSubmit = async ({ nombre, correo, password, tiposUsuarioId }) => {
     try {
-      await fetchData({
-        url: `/v1/usuarios/${usuario.id}`,
-        method: 'PATCH',
+      const newUsuario = await fetchData({
+        url: `/v1/usuarios`,
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${auth.usuario.token}`
@@ -72,32 +75,19 @@ function EditForm({
         body: JSON.stringify({
           nombre,
           correo,
+          password,
           tiposUsuarioId
         })
       })
 
       toast({
-        title: 'Usuario actualizado',
-        description: 'El usuario ha sido actualizado exitosamente',
+        title: 'Usuario creado',
+        description: 'El usuario ha sido creado exitosamente',
         status: 'success'
       })
 
-      let newUsuarios = usuarios.map(u => {
-        if (u.id !== usuario.id) return u
-        return {
-          ...u,
-          nombre,
-          correo,
-          tiposUsuarioId: parseInt(tiposUsuarioId)
-        }
-      })
-      setUsuarios(newUsuarios)
-
-      // Espera a que setUsuarios haya completado su actualización
-      await new Promise(resolve => setTimeout(resolve, 0))
-
-      // Después de que setUsuarios haya completado, entonces ejecuta setPageIndex
-      usuario.setPageIndex()
+      newUsuario.tipoUsuario = tiposUsuario.find(tu => tu.id === newUsuario.tiposUsuarioId)
+      setUsuarios([...usuarios, newUsuario])
     } catch (error) {
       if (error.error) {
         if (error.status === 401) {
@@ -112,7 +102,7 @@ function EditForm({
       }
     }
 
-    setOpenEditModal(false)
+    setOpenCreateModal(false)
   }
 
   return (
@@ -161,6 +151,22 @@ function EditForm({
             />
             <FormField
               control={form.control}
+              name='password'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input type='password' className='bg-zinc-900' placeholder='Password' {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Ingrese una contraseña segura
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name='tiposUsuarioId'
               render={({ field }) => (
                 <FormItem>
@@ -201,4 +207,4 @@ function EditForm({
   )
 }
 
-export { EditForm }
+export { CreateForm }
