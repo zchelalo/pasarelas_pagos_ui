@@ -55,8 +55,7 @@ function Usuarios() {
             setUsuarios={setUsuarios}
             tiposUsuario={tiposUsuario}
             setOpenEditModal={setOpenEditModal}
-            token={usuario.token}
-            logout={logout}
+            auth={{ usuario, logout }}
           />
         </ Modal>
       )}

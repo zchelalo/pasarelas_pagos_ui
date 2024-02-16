@@ -26,7 +26,7 @@ import { z } from 'zod'
 
 import { primeraMayuscula, fetchData } from '@/lib/utils'
 
-function EditForm({ t, usuario, usuarios, setUsuarios, tiposUsuario, setOpenEditModal, token, logout }) {
+function EditForm({ t, usuario, usuarios, setUsuarios, tiposUsuario, setOpenEditModal, auth }) {
   const { toast } = useToast()
 
   const formSchema = z.object({
@@ -59,7 +59,7 @@ function EditForm({ t, usuario, usuarios, setUsuarios, tiposUsuario, setOpenEdit
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${auth.usuario.token}`
         },
         body: JSON.stringify({
           nombre,
@@ -93,7 +93,7 @@ function EditForm({ t, usuario, usuarios, setUsuarios, tiposUsuario, setOpenEdit
     } catch (error) {
       if (error.error) {
         if (error.status === 401) {
-          logout()
+          auth.logout()
         }
   
         toast({
