@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Columns } from '@/pages/Usuarios/Columns'
 import { EditForm } from '@/pages/Usuarios/EditForm'
 import { CreateForm } from '@/pages/Usuarios/CreateForm'
+import { DeleteAlert } from '@/pages/Usuarios/DeleteAlert'
 
 import { IoIosAdd } from 'react-icons/io'
 
@@ -70,6 +71,18 @@ function Usuarios() {
             setUsuarios={setUsuarios}
             tiposUsuario={tiposUsuario}
             setOpenEditModal={setOpenEditModal}
+            auth={{ usuario, logout }}
+          />
+        </ Modal>
+      )}
+      {(openAlertModal && infoUsuario) && (
+        <Modal>
+          <DeleteAlert
+            t={t}
+            usuario={infoUsuario}
+            usuarios={usuarios}
+            setUsuarios={setUsuarios}
+            setOpenAlertModal={setOpenAlertModal}
             auth={{ usuario, logout }}
           />
         </ Modal>

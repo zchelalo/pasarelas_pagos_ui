@@ -111,9 +111,9 @@ function CreateForm({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full bg-zinc-950 p-4 rounded-xl'>
             <div className='flex flex-row justify-between items-center'>
-              <h1 className='text-2xl'>Editar usuario</h1>
+              <h1 className='text-2xl'>Crear usuario</h1>
               <IoClose
-                onClick={() => setOpenEditModal(false)}
+                onClick={() => setOpenCreateModal(false)}
                 className='text-2xl cursor-pointer'
               />
             </div>
@@ -195,10 +195,10 @@ function CreateForm({
               <Button
                 type='button'
                 className='ml-2 dark:bg-gray-200 dark:text-gray-800'
-                onClick={() => setOpenEditModal(false)}
+                onClick={() => setOpenCreateModal(false)}
               >
                 Cerrar
-                </Button>
+              </Button>
             </div>
           </form>
         </Form>

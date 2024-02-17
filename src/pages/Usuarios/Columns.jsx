@@ -21,6 +21,11 @@ function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoUsuario }) {
     setInfoUsuario(usuario)
   }
 
+  const abrirAlertBorrar = (usuario) => {
+    setOpenAlertModal(true)
+    setInfoUsuario(usuario)
+  }
+
   const columns = [
     {
       id: 'select',
@@ -182,6 +187,12 @@ function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoUsuario }) {
                 onClick={() => abrirModalEditar({ ...usuario, setPageIndex: () => table.setPageIndex(paginaActual) })}
               >
                 Editar
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className='cursor-pointer'
+                onClick={() => abrirAlertBorrar({ ...usuario, setPageIndex: () => table.setPageIndex(paginaActual) })}
+              >
+                Borrar
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
