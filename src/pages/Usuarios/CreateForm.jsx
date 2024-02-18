@@ -24,7 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { primeraMayuscula, fetchData } from '@/lib/utils'
+import { fetchData } from '@/lib/utils'
 
 function CreateForm({
   t,
@@ -38,18 +38,18 @@ function CreateForm({
 
   const formSchema = z.object({
     nombre: z.string().min(1, {
-      message: 'El nombre es requerido'
+      message: t('name_required')
     }),
     correo: z.string().email({
       message: t('email_validation')
     }),
     password: z.string().min(8, {
-      message: 'La contraseña es requerida y debe tener al menos 8 caracteres'
+      message: t('password_required')
     }),
     tiposUsuarioId: z.number().int({
-      message: 'El tipo de usuario debe ser un valor entero positivo'
+      message: t('user_type_value_validation')
     }).or(z.string().regex(/^[1-9]\d*$/, {
-      message: 'El tipo de usuario debe ser un valor entero positivo'
+      message: t('user_type_value_validation')
     }).transform(Number))
   })
 
@@ -81,8 +81,8 @@ function CreateForm({
       })
 
       toast({
-        title: 'Usuario creado',
-        description: 'El usuario ha sido creado exitosamente',
+        title: `${t('user')} ${t('created').toLowerCase()}`,
+        description: t('user_created_correctly'),
         status: 'success'
       })
 
@@ -111,7 +111,7 @@ function CreateForm({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full bg-zinc-950 p-4 rounded-xl'>
             <div className='flex flex-row justify-between items-center'>
-              <h1 className='text-2xl'>Crear usuario</h1>
+              <h1 className='text-2xl'>{t('create')} {t('user').toLowerCase()}</h1>
               <IoClose
                 onClick={() => setOpenCreateModal(false)}
                 className='text-2xl cursor-pointer'
@@ -122,12 +122,12 @@ function CreateForm({
               name='nombre'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nombre</FormLabel>
+                  <FormLabel>{t('name')}</FormLabel>
                   <FormControl>
-                    <Input className='bg-zinc-900' placeholder={t('email_placeholder')} {...field} />
+                    <Input className='bg-zinc-900' placeholder={t('name')} {...field} />
                   </FormControl>
                   <FormDescription>
-                    Ingrese un nombre
+                    {t('enter_a')} {t('name').toLowerCase()}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -159,7 +159,7 @@ function CreateForm({
                     <Input type='password' className='bg-zinc-900' placeholder='Password' {...field} />
                   </FormControl>
                   <FormDescription>
-                    Ingrese una contraseña segura
+                    {t('enter_a')} {t('safe_password').toLowerCase()}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -170,34 +170,34 @@ function CreateForm({
               name='tiposUsuarioId'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tipo de usuario</FormLabel>
+                  <FormLabel>{t('user_type')}</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger className='w-full bg-zinc-900'>
-                        <SelectValue placeholder='Tipo de usuario' />
+                        <SelectValue placeholder={t('user_type')} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className='bg-zinc-900'>
                       {tiposUsuario?.map((tipoUsuario) => (
-                        <SelectItem key={tipoUsuario.id} value={(tipoUsuario.id).toString()}>{primeraMayuscula(tipoUsuario.nombre)}</SelectItem>
+                        <SelectItem key={tipoUsuario.id} value={(tipoUsuario.id).toString()}>{t(tipoUsuario.nombre)}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                   <FormDescription>
-                    Seleccione un tipo de usuario
+                    {t('select_a')} {t('user_type').toLowerCase()}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <div>
-              <Button type='submit' className='dark:bg-gray-200 dark:text-gray-800'>{t('submit')}</Button>
+              <Button type='submit' className='rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-800 hover:text-gray-200 dark:text-gray-800 dark:bg-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-200'>{t('submit')}</Button>
               <Button
                 type='button'
-                className='ml-2 dark:bg-gray-200 dark:text-gray-800'
+                className='ml-2 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-800 hover:text-gray-200 dark:text-gray-800 dark:bg-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-200'
                 onClick={() => setOpenCreateModal(false)}
               >
-                Cerrar
+                {t('close')}
               </Button>
             </div>
           </form>

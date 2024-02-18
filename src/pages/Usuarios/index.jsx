@@ -42,12 +42,12 @@ function Usuarios() {
   return (
     <>
       <div className='flex flex-wrap'>
-        <h1 className='text-4xl mr-4'>Usuarios</h1>
+        <h1 className='text-4xl mr-4'>{t('users')}</h1>
         <Button 
           className='rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-800 hover:text-gray-200 dark:text-gray-800 dark:bg-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-200'
           onClick={() => setOpenCreateModal(true)}
         >
-          Agregar usuario <IoIosAdd className='text-2xl' />
+          {t('add_user')} <IoIosAdd className='text-2xl' />
         </Button>
       </div>
       {loading && <p>Cargando...</p>}

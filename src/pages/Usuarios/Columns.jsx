@@ -13,7 +13,6 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { MdDelete } from 'react-icons/md'
 
 import moment from 'moment'
-import { primeraMayuscula } from '@/lib/utils'
 
 function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoUsuario }) {
   const abrirModalEditar = (usuario) => {
@@ -70,7 +69,7 @@ function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoUsuario }) {
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Nombre
+            {t('name')}
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         )
@@ -84,7 +83,7 @@ function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoUsuario }) {
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Correo
+            {t('email')}
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         )
@@ -98,13 +97,13 @@ function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoUsuario }) {
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Tipo de usuario
+            {t('user_type')}
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         )
       },
       accessorKey: 'tipoUsuario.nombre',
-      cell: info => primeraMayuscula(info.getValue())
+      cell: info => t(info.getValue())
     },
     {
       header: ({ column }) => {
@@ -186,13 +185,13 @@ function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoUsuario }) {
                 className='cursor-pointer'
                 onClick={() => abrirModalEditar({ ...usuario, setPageIndex: () => table.setPageIndex(paginaActual) })}
               >
-                Editar
+                {t('edit')}
               </DropdownMenuItem>
               <DropdownMenuItem
                 className='cursor-pointer'
                 onClick={() => abrirAlertBorrar({ ...usuario, setPageIndex: () => table.setPageIndex(paginaActual) })}
               >
-                Borrar
+                {t('delete')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

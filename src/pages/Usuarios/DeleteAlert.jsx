@@ -29,8 +29,8 @@ function DeleteAlert({
       })
 
       toast({
-        title: 'Usuario eliminado',
-        description: 'El usuario ha sido eliminado exitosamente',
+        title: `${t('user')} ${t('deleted').toLowerCase()}`,
+        description: t('user_deleted_correctly'),
         status: 'success'
       })
 
@@ -64,21 +64,21 @@ function DeleteAlert({
       <ScrollArea className='w-full sm:w-2/3 md:w-1/2'>
         <form onSubmit={borrarUsuario} className='space-y-8 w-full bg-zinc-950 p-4 rounded-xl'>
           <div className='flex flex-row justify-between items-center'>
-            <h1 className='text-2xl'>Borrar usuario</h1>
+            <h1 className='text-2xl'>{t('delete')} {t('user').toLowerCase()}</h1>
             <IoClose
               onClick={() => setOpenAlertModal(false)}
               className='text-2xl cursor-pointer'
             />
           </div>
-          <p className='text-xl'>¿Estás seguro de que quieres borrar al usuario <b>{usuario.nombre}</b>?</p>
+          <p className='text-xl'>{t('are_you_sure_delete_user')} <b>{usuario.nombre}</b>?</p>
           <div>
-            <Button type='submit' className='dark:bg-gray-200 dark:text-gray-800'>Borrar</Button>
+            <Button type='submit' className='rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-800 hover:text-gray-200 dark:text-gray-800 dark:bg-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-200'>{t('delete')}</Button>
             <Button
               type='button'
-              className='ml-2 dark:bg-gray-200 dark:text-gray-800'
+              className='ml-2 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-800 hover:text-gray-200 dark:text-gray-800 dark:bg-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-200'
               onClick={() => setOpenAlertModal(false)}
             >
-              Cerrar
+              {t('close')}
             </Button>
           </div>
         </form>
