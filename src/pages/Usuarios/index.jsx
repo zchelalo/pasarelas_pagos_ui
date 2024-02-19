@@ -11,6 +11,7 @@ import { Columns } from '@/pages/Usuarios/Columns'
 import { EditForm } from '@/pages/Usuarios/EditForm'
 import { CreateForm } from '@/pages/Usuarios/CreateForm'
 import { DeleteAlert } from '@/pages/Usuarios/DeleteAlert'
+import { Loading } from '@/pages/Usuarios/Loading'
 
 import { IoIosAdd } from 'react-icons/io'
 
@@ -50,7 +51,7 @@ function Usuarios() {
           {t('add_user')} <IoIosAdd className='text-2xl' />
         </Button>
       </div>
-      {loading && <p>Cargando...</p>}
+      {loading && <Loading />}
       {!loading && ((!error && usuarios.length > 0) ? (
         <DataTable
           data={usuarios}
