@@ -192,7 +192,7 @@ function EditForm({
                 onClick={() => setOpenEditModal(false)}
               >
                 {t('close')}
-                </Button>
+              </Button>
             </div>
           </form>
         </Form>

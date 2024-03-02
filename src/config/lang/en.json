@@ -4,6 +4,7 @@
   "add_user": "Add user",
   "profile": "Profile",
   "payment_gateways": "Payment gateways",
+  "add_payment_gateway": "Add payment gateway",
   "login": "Login",
   "logout": "Logout",
   "keys": "Keys",
@@ -95,5 +96,10 @@
   "created": "Created",
   "user_created_correctly": "The user has been created correctly",
   "password_required": "The password is required and must be at least 8 characters",
-  "email": "Email"
+  "email": "Email",
+  "api_key_required": "The API key is required",
+  "api_key": "API key",
+  "payment_gateway_updated": "Payment gateway updated",
+  "payment_gateway_updated_correctly": "Payment gateway updated correctly",
+  "last_updated": "Last updated"
 }

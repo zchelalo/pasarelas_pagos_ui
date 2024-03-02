@@ -4,6 +4,7 @@
   "add_user": "Agregar usuario",
   "profile": "Perfil",
   "payment_gateways": "Pasarelas de pago",
+  "add_payment_gateway": "Agregar pasarela de pago",
   "login": "Iniciar sesión",
   "logout": "Cerrar sesión",
   "keys": "Llaves",
@@ -95,5 +96,10 @@
   "created": "Creado",
   "user_created_correctly": "El usuario ha sido creado correctamente",
   "password_required": "La contraseña es requerida y debe tener al menos 8 caracteres",
-  "email": "Correo"
+  "email": "Correo",
+  "api_key_required": "La llave de la API es requerida",
+  "api_key": "Llave de la API",
+  "payment_gateway_updated": "Pasarela de pago actualizada",
+  "payment_gateway_updated_correctly": "Pasarela de pago actualizada correctamente",
+  "last_updated": "Última actualización"
 }
