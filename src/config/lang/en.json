@@ -4,6 +4,7 @@
   "add_user": "Add user",
   "profile": "Profile",
   "payment_gateways": "Payment gateways",
+  "payment_gateway": "Payment gateway",
   "add_payment_gateway": "Add payment gateway",
   "login": "Login",
   "logout": "Logout",
@@ -101,5 +102,6 @@
   "api_key": "API key",
   "payment_gateway_updated": "Payment gateway updated",
   "payment_gateway_updated_correctly": "Payment gateway updated correctly",
-  "last_updated": "Last updated"
+  "last_updated": "Last updated",
+  "clave": "Public key"
 }
