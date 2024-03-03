@@ -78,14 +78,16 @@ function Rutas() {
       path: '/pasarelas',
       element: (
         <AuthRoute>
-          <Pasarelas />
+          <RolesPermitidos roles={['admin']}>
+            <Pasarelas />
+          </RolesPermitidos>
         </AuthRoute>
       ),
       name: t('payment_gateways'),
       icon: <MdPayments />,
       private: true,
       public_only: false,
-      allowed_roles: ['admin', 'cliente']
+      allowed_roles: ['admin']
     },
     {
       path: '/keys',

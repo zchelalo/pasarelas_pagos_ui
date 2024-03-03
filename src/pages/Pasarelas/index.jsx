@@ -3,10 +3,11 @@ import { useAuth } from '@/contexts/AuthContext/useAuth'
 import { useFetch } from '@/hooks/useFetch'
 
 import { CardPasarela } from '@/pages/Pasarelas/CardPasarela'
+import { Loading } from '@/pages/Pasarelas/Loading'
 
 function Pasarelas() {
   const { usuario, logout } = useAuth()
-  const { data: pasarelas, setData: setPasarelas, loading, error } = useFetch({
+  const { data: pasarelas, loading, error } = useFetch({
     url: '/v1/pasarelas',
     method: 'GET',
     headers: {
@@ -22,7 +23,7 @@ function Pasarelas() {
       <div className='flex flex-wrap'>
         <h1 className='text-4xl'>{t('payment_gateways')}</h1>
       </div>
-      {loading && 'Cargando'}
+      {loading && <Loading />}
       {!loading && ((!error && pasarelas.length > 0) ? (
         <div className='flex flex-wrap mt-3'>
           {pasarelas.map(pasarela => (
