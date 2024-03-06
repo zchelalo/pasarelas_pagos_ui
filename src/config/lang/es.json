@@ -88,8 +88,10 @@
   "user": "Usuario",
   "deleted": "Eliminado",
   "delete": "Eliminar",
+  "update": "Actualizar",
   "user_deleted_correctly": "El usuario ha sido eliminado correctamente",
   "are_you_sure_delete_user": "¿Estás seguro de que quieres eliminar al usuario",
+  "are_you_sure_update_secret_key": "¿Estás seguro de que quieres actualizar la llave secreta?",
   "admin": "Administrador",
   "cliente": "Cliente",
   "safe_password": "Password seguro",
@@ -100,8 +102,11 @@
   "email": "Correo",
   "api_key_required": "La llave de la API es requerida",
   "api_key": "Llave de la API",
+  "secret_key": "Llave secreta",
   "payment_gateway_updated": "Pasarela de pago actualizada",
   "payment_gateway_updated_correctly": "Pasarela de pago actualizada correctamente",
   "last_updated": "Última actualización",
-  "clave": "Clave pública"
+  "clave": "Clave pública",
+  "previous_secret_key_will_stop_working": "La llave secreta anterior dejará de funcionar una vez esta sea actualizada",
+  "secret_key_updated_correctly": "La llave secreta ha sido actualizada correctamente"
 }
