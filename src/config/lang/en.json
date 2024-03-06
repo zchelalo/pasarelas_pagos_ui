@@ -89,6 +89,7 @@
   "deleted": "Deleted",
   "delete": "Delete",
   "update": "Update",
+  "updated": "Updated",
   "user_deleted_correctly": "The user has been deleted correctly",
   "are_you_sure_delete_user": "Are you sure you want to delete the user",
   "are_you_sure_update_secret_key": "Are you sure you want to update the secret key?",
@@ -108,5 +109,8 @@
   "last_updated": "Last updated",
   "clave": "Public key",
   "previous_secret_key_will_stop_working": "The previous secret key will stop working once it is updated",
-  "secret_key_updated_correctly": "The secret key has been updated correctly"
+  "secret_key_updated_correctly": "The secret key has been updated correctly",
+  "copy_public_key": "Copy public key",
+  "generete_new_secret_key": "Generete a new secret key",
+  "add_key": "Add key"
 }

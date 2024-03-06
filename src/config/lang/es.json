@@ -89,6 +89,7 @@
   "deleted": "Eliminado",
   "delete": "Eliminar",
   "update": "Actualizar",
+  "updated": "Actualizada",
   "user_deleted_correctly": "El usuario ha sido eliminado correctamente",
   "are_you_sure_delete_user": "¿Estás seguro de que quieres eliminar al usuario",
   "are_you_sure_update_secret_key": "¿Estás seguro de que quieres actualizar la llave secreta?",
@@ -108,5 +109,8 @@
   "last_updated": "Última actualización",
   "clave": "Clave pública",
   "previous_secret_key_will_stop_working": "La llave secreta anterior dejará de funcionar una vez esta sea actualizada",
-  "secret_key_updated_correctly": "La llave secreta ha sido actualizada correctamente"
+  "secret_key_updated_correctly": "La llave secreta ha sido actualizada correctamente",
+  "copy_public_key": "Copiar clave pública",
+  "generete_new_secret_key": "Generar una nueva llave secreta",
+  "add_key": "Agregar llave"
 }

@@ -179,12 +179,18 @@ function Columns({ t, setOpenEditModal, setOpenAlertModal, setInfoKey}) {
               >
                 {t('copy_id')}
               </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => navigator.clipboard.writeText(key.clave)}
+                className='cursor-pointer'
+              >
+                {t('copy_public_key')}
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className='cursor-pointer'
                 onClick={() => abrirModalEditar({ ...key, setPageIndex: () => table.setPageIndex(paginaActual) })}
               >
-                Generete a new secret key
+                {t('generete_new_secret_key')}
               </DropdownMenuItem>
               <DropdownMenuItem
                 className='cursor-pointer'
