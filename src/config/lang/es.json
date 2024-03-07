@@ -76,6 +76,7 @@
   "no_payments_registered": "No hay pagos registrados",
   "name_required": "El nombre es requerido",
   "user_type_value_validation": "El tipo de usuario debe ser un valor entero positivo",
+  "payment_gateway_value_validation": "La pasarela de pago debe ser un valor entero positivo",
   "user_updated": "Usuario actualizado",
   "user_updated_correctly": "El usuario ha sido actualizado correctamente",
   "edit": "Editar",
@@ -115,5 +116,6 @@
   "add_key": "Agregar llave",
   "key": "Llave",
   "key_deleted_correctly": "La llave ha sido eliminada correctamente",
-  "are_you_sure_delete_key": "¿Estás seguro de que quieres eliminar la llave que inicia con"
+  "are_you_sure_delete_key": "¿Estás seguro de que quieres eliminar la llave que inicia con",
+  "key_created_correctly": "La llave ha sido creada correctamente"
 }

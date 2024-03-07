@@ -76,6 +76,7 @@
   "no_payments_registered": "No payments registered",
   "name_required": "The name is required",
   "user_type_value_validation": "User type must be a positive integer value",
+  "payment_gateway_value_validation": "Payment gateway must be a positive integer value",
   "user_updated": "User updated",
   "user_updated_correctly": "The user has been updated correctly",
   "edit": "Edit",
@@ -115,5 +116,6 @@
   "add_key": "Add key",
   "key": "Key",
   "key_deleted_correctly": "The key has been deleted correctly",
-  "are_you_sure_delete_key": "Are you sure you want to delete the key that starts with"
+  "are_you_sure_delete_key": "Are you sure you want to delete the key that starts with",
+  "key_created_correctly": "The key has been created correctly"
 }
