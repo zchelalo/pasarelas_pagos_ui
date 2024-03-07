@@ -10,9 +10,6 @@ import { fetchData } from '@/lib/utils'
 function EditForm({
   t,
   infoKey,
-  keys,
-  setKeys,
-  pasarelas,
   setOpenEditModal,
   auth
 }) {

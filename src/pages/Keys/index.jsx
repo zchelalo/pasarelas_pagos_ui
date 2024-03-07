@@ -73,9 +73,6 @@ function Keys() {
           <EditForm
             t={t}
             infoKey={infoKey}
-            keys={keys}
-            setKeys={setKeys}
-            pasarelas={pasarelas}
             setOpenEditModal={setOpenEditModal}
             auth={{ usuario, logout }}
           />
