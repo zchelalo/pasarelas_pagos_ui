@@ -112,5 +112,8 @@
   "secret_key_updated_correctly": "The secret key has been updated correctly",
   "copy_public_key": "Copy public key",
   "generete_new_secret_key": "Generete a new secret key",
-  "add_key": "Add key"
+  "add_key": "Add key",
+  "key": "Key",
+  "key_deleted_correctly": "The key has been deleted correctly",
+  "are_you_sure_delete_key": "Are you sure you want to delete the key that starts with"
 }

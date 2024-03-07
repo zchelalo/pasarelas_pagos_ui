@@ -112,5 +112,8 @@
   "secret_key_updated_correctly": "La llave secreta ha sido actualizada correctamente",
   "copy_public_key": "Copiar clave pública",
   "generete_new_secret_key": "Generar una nueva llave secreta",
-  "add_key": "Agregar llave"
+  "add_key": "Agregar llave",
+  "key": "Llave",
+  "key_deleted_correctly": "La llave ha sido eliminada correctamente",
+  "are_you_sure_delete_key": "¿Estás seguro de que quieres eliminar la llave que inicia con"
 }
