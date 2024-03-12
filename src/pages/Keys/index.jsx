@@ -7,6 +7,7 @@ import { Columns } from '@/pages/Keys/Columns'
 import { CreateForm } from '@/pages/Keys/CreateForm'
 import { EditForm } from '@/pages/Keys/EditForm'
 import { DeleteAlert } from '@/pages/Keys/DeleteAlert'
+import { Loading } from '@/pages/Keys/Loading'
 
 import { IoIosAdd } from 'react-icons/io'
 
@@ -56,7 +57,7 @@ function Keys() {
           </>
         )}
       </div>
-      {loading && 'Cargando...'}
+      {loading && <Loading />}
       {!loading && ((!error && keys.length > 0) ? (
         <DataTable
           data={keys}
